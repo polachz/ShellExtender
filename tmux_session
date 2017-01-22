@@ -1,0 +1,75 @@
+#title           :tmux_session
+#description     :start or attach tmux remote session on SSH login
+#author          :zdenek polach ( https://github.com/polachz )
+#date            :21.01.2017
+#version         :0.1
+#usage           :called by wrapper script
+#notes           :
+#==============================================================================
+
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License at <http://www.gnu.org/licenses/> for
+# more details.
+
+#==============================================================================
+
+# This script uses these variables:
+# TMUX_START_ON_SSH_LOGIN=yes
+# TMUX_EXIT_SSH_SESSION_ON_DETACH=yes
+# TMUX_SHOW_MOTD=yes
+#
+# Take llok to config file for better description and change defaults
+
+
+if [[ ! $TMUX ]] ; then
+   if [[ $TMUX_START_ON_SSH_LOGIN = yes ]] ; then
+      if [ -n "$ZSH_VERSION" ]; then
+         # we are in ZSH
+         if (( $+commands[tmux] )) ; then
+            USE_TMUX="yes"
+         fi
+      elif [ -n "$BASH_VERSION" ]; then
+         #we are in BASH
+          
+         if [[ -f $(which tmux) ]]; then
+            USE_TMUX="yes"
+         fi
+      fi
+#      if (( $+commands[tmux] )) ; then
+#         USE_TMUX="yes"
+#      fi
+   fi
+
+   if [ "$USE_TMUX" = "yes" -a "$PS1" != "" -a "$TMUX" = "" -a "${SSH_TTY:-x}" != x ]; then
+      sleep 1
+      ( (tmux has-session -t remote &>/dev/null && tmux attach-session -t remote) || (tmux new-session -s remote) )
+      if [ $? -ne 0 ]; then
+         echo "tmux failed to start"
+         exit 99
+      fi
+      if [[ $TMUX_EXIT_SSH_SESSION_ON_DETACH = yes ]] ; then
+         exit 0 
+      fi
+   fi
+else
+   #We are inside TMUX session
+   if [[ $TMUX_SHOW_MOTD = yes ]] ; then
+      echo
+      if [ -f /var/run/motd.dynamic ]; then
+         cat /var/run/motd.dynamic
+      else
+         if [ -f /etc/motd ]; then
+            cat /etc/motd
+         fi
+      fi
+   fi
+fi
+
+

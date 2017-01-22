@@ -1,0 +1,56 @@
+
+#title           :config
+#description     :configuration file for the Shell Extender scripts
+#author		 :zdenek polach ( https://github.com/polachz )
+#date            :21.01.2017
+#version         :0.1
+#usage		 :is invoked by Shell Extender main script
+#notes           :
+#==============================================================================
+
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License at <http://www.gnu.org/licenses/> for
+# more details.
+
+#==============================================================================
+
+#Configuration file for shell extender
+
+#define here editor which you prefer to use
+PREFERRED_EDITOR='vim'
+
+# Uncomment the following line to attach tmux to the session "remote"
+# If session doesn't exist, new one will be created
+# This option works only for SSH remote sessions. Local terminals are
+# unaffected by this functionality
+TMUX_START_ON_SSH_LOGIN=yes
+
+# Uncomment the following line if you want to terminate established SSH 
+# session on tmux detach or exit operation. Otherwise SSH session 
+# stay to be established until explicit exit.
+# TMUX_EXIT_SSH_SESSION_ON_DETACH=yes
+
+# Uncomment the following line to display the "Message of the day" (motd)
+# in the new tmux window (session)
+# one from  /var/run/motd.dynamic file or /etc/motd files have to exist
+TMUX_SHOW_MOTD=yes
+
+if type shopt >& /dev/null; then
+   shopt -s histappend        # Append history instead of overwriting
+   shopt -s cdspell           # Correct minor spelling errors in cd command
+   shopt -s dotglob           # includes dotfiles in pathname expansion
+   shopt -s checkwinsize      # If window size changes, redraw contents
+   shopt -s cmdhist           # Multiline commands are a single command in history.
+   shopt -s extglob           # Allows basic regexps in bash.
+fi
+
+
+#set ignoreeof on           # Typing EOF (CTRL+D) will not exit interactive sessions
+
