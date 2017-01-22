@@ -1,0 +1,70 @@
+#title           :aliases
+#description     :defines some useful aliases
+#author          :zdenek polach ( https://github.com/polachz )
+#date            :21.01.2017
+#version         :0.1
+#usage           :is invoked by Shell Extender main script
+#notes           :based on source https://justin.abrah.ms/dotfiles/zsh.html
+#==============================================================================
+
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License at <http://www.gnu.org/licenses/> for
+# more details.
+
+#==============================================================================
+
+
+# Filesystem
+alias ..='cd ..'            # Go up one directory
+alias ...='cd ../..'        # Go up two directories
+alias ....='cd ../../..'    # And for good measure
+alias ls='ls --color=auto'  # gimmie colors
+alias l='ls -lFh --color=auto'   # Long view, no hidden
+alias la='ls -AF --color=auto'   # Compact view, show hidden
+alias ll='ls -laFh --color=auto'  # Long view, show hidden
+
+# Add an "alert" alias for long running commands.  Use like so:
+#   sleep 10; alert
+alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+
+
+alias tmux='TERM=xterm-256color \tmux'
+
+# Helpers
+alias grep='grep --color=auto' # Always highlight grep search term
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+alias ping='ping -c 5'      # Pings with 5 packets, not unlimited
+alias df='df -h'            # Disk free, in gigabytes, not bytes
+alias du='du -h -c'         # Calculate total disk usage for a folder
+alias sgi='sudo gem install' # Install ruby stuff
+alias be='bundle exec'       # shortcut for ruby environment activation
+alias dc='docker-compose'    # invoke docker-compose, which takes too long to type.
+alias clj='clj-env-dir'      # Clojure helper
+alias clr='clear;echo "Currently logged in on $(tty), as $(whoami) in directory $(pwd)."'
+alias tt='tt++ $HOME/.ttconf'
+alias svim="sudo vim" # Run vim as super user
+alias emc="emacsclient -n" # no blocking terminal waiting for edit
+
+# Nifty extras
+# servethis -  spawn a simple HTTP server on port 8000 serving the current directory
+alias servethis="python -c 'import SimpleHTTPServer; SimpleHTTPServer.test()'"
+#pypath -  print your python path, minus all the egg files
+alias pypath='python -c "import sys; print sys.path" | tr "," "\n" | grep -v "egg"'
+#pycclean - recursively clean out all of the pyc files from current directory
+alias pycclean='find . -name "*.pyc" -exec rm {} \; && find . -name "__pycache__" -exec rm -rf {} \;'
+
+
+# curl for useragents
+alias iecurl="curl -H \"User-Agent: Mozilla/5.0 (Windows; U; MSIE 6.0; Windows NT 5.1; SV1; .NET CLR 2.0.50727)\""
+alias ffcurl="curl -H \"User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.0.8) Gecko/2009032609 Firefox/3.0.0 (.NET CLR 3.5.30729)\""
+
+# list all sub-directories in the current directory
+alias lld="ls -laFh --color=auto |grep ^d | awk '{ print $9 }' | tr -d "/""

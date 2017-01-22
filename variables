@@ -1,0 +1,118 @@
+#title           :variables
+#description     :defines shell variables
+#author          :zdenek polach ( https://github.com/polachz )
+#date            :21.01.2017
+#version         :0.1
+#usage           :is invoked by Shell Extender main script
+#notes           :based on source https://justin.abrah.ms/dotfiles/zsh.html
+#==============================================================================
+
+# Add own PATH elements if necessary
+
+  #export PATH=/my/path/element:$PATH
+  #export INFOPATH=$INFOPATH:/usr/share/info
+  #export MANPATH=/opt/local/share/man:$MANPATH
+
+# Specify SSH Keys path
+  #export SSH_KEY_PATH="~/.ssh/rsa_id"
+
+# Define default editor
+  export EDITOR=$PREFERRED_EDITOR 
+
+# Define colora and formats for GREP output
+  export GREP_COLORS='ms=01;31:mc=01;31:sl=:cx=:fn=35:ln=32:bn=32:se=36'
+
+# Modify LESS Environment
+
+  # Allow colors and search with ignore case
+  export LESS="-i -R"
+
+  # Allow to colorize source code - if supported
+  if [[ -f /usr/bin/src-hilite-lesspipe.sh ]]; then
+     export LESSOPEN="| /usr/bin/src-hilite-lesspipe.sh %s"
+  fi
+  #Disable less history
+  export LESSHISTFILE=/dev/null
+
+  #Colorize LESS output for MAN pages
+  export LESS_TERMCAP_mb=$'\E[01;32m'
+  export LESS_TERMCAP_md=$'\E[01;32m'
+  export LESS_TERMCAP_me=$'\E[0m'
+  export LESS_TERMCAP_se=$'\E[0m'
+  export LESS_TERMCAP_so=$'\E[01;44;33m'
+  export LESS_TERMCAP_ue=$'\E[0m'
+  export LESS_TERMCAP_us=$'\E[01;37m'
+
+#Modify settings for shell history
+
+  export HISTCONTROL=erasedups  # Ignore duplicate entries in history
+  export HISTFILE=~/.histfile   # Write the history to the ~/.histfile
+  export HISTSIZE=5000          # Increases size of history
+  export SAVEHIST=5000          # How many history commands will be persistent
+  export HISTIGNORE="&:ls:ll:la:l.:pwd:exit:clear:clr:[bf]g"
+
+# Define escape sequences for formatting and colorize shell output
+
+  #Text formatting escape sequences
+  #Enable format
+  export TXT_BOLD='\033[00;01m'
+  export TXT_DIM='\033[00;02m'
+  export TXT_UNDELINED='\033[00;04m'
+  export TXT_BLINK='\033[00;05m'
+  export TXT_INVERT='\033[00;07m'
+  export TXT_HIDDEN='\033[00;08m'
+  #Disable format
+  export TXT_NO_BOLD='\033[00;31m'
+  export TXT_NO_DIM='\033[00;42m'
+  export TXT_NO_UNDELINED='\033[00;24m'
+  export TXT_NO_BLINK='\033[00;25m'
+  export TXT_NO_INVERT='\033[00;27m'
+  export TXT_NO_HIDDEN='\033[00;28m'
+
+  #Reset all text formatting
+  TXT_RESET='\033[00;00m'
+
+  #Text color codes 
+
+  export TXT_BLACK='\033[00;30m'
+  export TXT_RED='\033[00;31m'
+  export TXT_GREEN='\033[00;32m'
+  export TXT_YELLOW='\033[00;33m'
+  export TXT_BLUE='\033[00;34m'
+  export TXT_PURPLE='\033[00;35m'
+  export TXT_CYAN='\033[00;36m'
+  export TXT_LIGHTGRAY='\033[00;37m'
+  export TXT_DARKGRAY='\033[01;30m'
+  export TXT_LRED='\033[01;31m'
+  export TXT_LGREEN='\033[01;32m'
+  export TXT_LYELLOW='\033[01;33m'
+  export TXT_LBLUE='\033[01;34m'
+  export TXT_LPURPLE='\033[01;35m'
+  export TXT_LCYAN='\033[01;36m'
+  export TXT_WHITE='\033[01;37m'
+  
+  #Reset text color to default
+  export TXT_NO_COLOR='\033[00;39m'
+
+  #Background color codes
+
+  export BKG_BLACK='\033[00;40m'
+  export BKG_RED='\033[00;41m'
+  export BKG_GREEN='\033[00;42m'
+  export BKG_YELLOW='\033[00;43m'
+  export BKG_BLUE='\033[00;44m'
+  export BKG_PURPLE='\033[00;45m'
+  export BKG_CYAN='\033[00;46m'
+  export BKG_LIGHTGRAY='\033[00;47m'
+  export BKG_DARKGRAY='\033[01;40m'
+  export BKG_LRED='\033[01;41m'
+  export BKG_LGREEN='\033[01;42m'
+  export BKG_LYELLOW='\033[01;43m'
+  export BKG_LBLUE='\033[01;44m'
+  export BKG_LPURPLE='\033[01;45m'
+  export BKG_LCYAN='\033[01;46m'
+  export BKG_WHITE='\033[01;47m'
+  
+  #Reset background color to default
+  BKG_NO_COLOR='\033[00;49m'
+

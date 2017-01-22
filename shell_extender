@@ -1,0 +1,64 @@
+#title           :wrapper
+#description     :main script foe the shell extender
+#author          :zdenek polach ( https://github.com/polachz )
+#date            :21.01.2017
+#version         :0.1
+#usage           :include it to end of your .zshrc or .bashrc file
+#notes           :
+#==============================================================================
+
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License at <http://www.gnu.org/licenses/> for
+# more details.
+
+#==============================================================================
+
+#define helepr function to detext if command or function already exists
+
+helper_cmd_exist_fn()
+{
+   if which $1 >& /dev/null; then
+      HELPER_CMD_EXIST_FN=yes
+   elif declare -f $1 >& /dev/null ; then
+      HELPER_CMD_EXIST_FN=yes
+   else
+      HELPER_CMD_EXIST_FN=no
+   fi
+}
+
+# Read configuration from the config file
+if [ -f "$SHELL_EXTENDER_DIR/config" ]; then
+   . "$SHELL_EXTENDER_DIR/config"
+fi
+
+# Create specified alliases
+if [ -f  "$SHELL_EXTENDER_DIR/aliases" ]; then
+   . "$SHELL_EXTENDER_DIR/aliases"
+fi
+
+# Define functions
+if [ -f  "$SHELL_EXTENDER_DIR/functions" ]; then
+   . "$SHELL_EXTENDER_DIR/functions"
+fi
+if [ -f  "$SHELL_EXTENDER_DIR/variables" ]; then
+   . "$SHELL_EXTENDER_DIR/variables"
+fi
+
+# Run host specific commands and definitions
+# This file have to be created manually if want to
+if [ -f "$SHELL_EXTENDER_DIR/host_specific" ]; then
+   . "$SHELL_EXTENDER_DIR/host_specific"
+fi
+
+# Create TMUX session if enabled by configuration
+if [ -f "$SHELL_EXTENDER_DIR/tmux_session" ]; then
+   . "$SHELL_EXTENDER_DIR/tmux_session"
+fi
+
