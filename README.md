@@ -1,6 +1,8 @@
 # ShellExtender
 This project modify and extend ZSH or BASH shell about some new functionality.
 
+* Fire new or attach to existing TMUX "remote" session when connected through SSH automatically - your work stay preserved even if connection to your server is lost or corrupted
+
 * Defines aliases (see **aliases** file)
   * Filesystem aliases as **ll, ls, ..** etc.
   * **grep** colorization
@@ -34,8 +36,6 @@ This project modify and extend ZSH or BASH shell about some new functionality.
   * Shell **history** parameters variables
   * Escape sequences for **formatting** and **colorize** shell output
   
-* Fire new or attach to existing TMUX session when connected through SSH
-
 ##How to enable 
 1. Create any sub-folder in your home directory (.shell_extender)
 2. Copy project content to the directory
