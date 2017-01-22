@@ -42,11 +42,11 @@ This project modify and extend ZSH or BASH shell about some new functionality.
 3. Modify **config** file in the directory to fit your needs
 4. Append following sniplet at the end of your .zshrc or .bashrc file
 
-```bash
-SHELL_EXTENDER_DIR=~/.shell_extender
-
-if [[ -f "$SHELL_EXTENDER_DIR/shell_extender" ]]; then
-   . "$SHELL_EXTENDER_DIR/shell_extender"
-fi
-```
+   ```bash
+   SHELL_EXTENDER_DIR=~/.shell_extender
+   
+   if [[ -f "$SHELL_EXTENDER_DIR/shell_extender" ]]; then
+      . "$SHELL_EXTENDER_DIR/shell_extender"
+   fi
+   ```
 5. Enjoy new functionality
