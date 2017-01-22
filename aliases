@@ -68,3 +68,6 @@ alias ffcurl="curl -H \"User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-
 
 # list all sub-directories in the current directory
 alias lld="ls -laFh --color=auto |grep ^d | awk '{ print $9 }' | tr -d "/""
+
+# connect to ssh server with password instead of public key (useful when you have more keys and other side can't process them all)
+alias pssh="ssh -o PreferredAuthentications=password -o PubkeyAuthentication=no"
