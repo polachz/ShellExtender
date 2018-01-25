@@ -64,3 +64,6 @@ fi
 
 #set ignoreeof on           # Typing EOF (CTRL+D) will not exit interactive sessions
 
+#Uncomment the following line if you want to colorize the shell prompt
+COLORIZE_SHELL_PROMPT=yes
+

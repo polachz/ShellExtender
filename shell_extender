@@ -67,6 +67,13 @@ if [ -f "$SHELL_EXTENDER_DIR/host_specific" ]; then
    . "$SHELL_EXTENDER_DIR/host_specific"
 fi
 
+#colorize prompt if requested
+if [[ $COLORIZE_SHELL_PROMPT = yes ]] ; then
+   if [ -f "$SHELL_EXTENDER_DIR/color_prompt" ]; then
+      . "$SHELL_EXTENDER_DIR/color_prompt"
+   fi
+fi
+
 # Create TMUX session if enabled by configuration
 if [ -f "$SHELL_EXTENDER_DIR/tmux_session" ]; then
    . "$SHELL_EXTENDER_DIR/tmux_session"
